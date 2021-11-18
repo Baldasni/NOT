@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using NOT.Models;
 
+// leggi https://www.tektutorialshub.com/asp-net/asp-net-identity-tutorial-basics/#identityuser
 namespace NOT
 {
     public class EmailService : IIdentityMessageService
