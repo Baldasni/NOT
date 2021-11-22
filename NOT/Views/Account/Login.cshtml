@@ -15,7 +15,7 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
@@ -38,11 +38,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Accedi" class="btn btn-default" />
+                        <input type="submit" value="Accedi" class="btn btn-default btn-outline-primary" />
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Esegui registrazione come nuovo utente", "Register")
+                    @Html.ActionLink("Esegui registrazione come nuovo utente", "Register", routeValues: null, htmlAttributes: new { @class = "btn btn-default btn-outline-primary" })
                 </p>
                 @* Abilitare questa opzione dopo aver abilitato la conferma dell'account per la funzionalità di reimpostazione della password
             <p>

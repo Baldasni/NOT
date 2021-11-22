@@ -35,42 +35,41 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
+    //var roleList = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>.GetValues(NOT.Models.RuoloEnum.Admin); /*Enum.GetValues(typeof(NOT.Models.Ruolo));*/
 
-    var roleList = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>.GetValues(NOT.Models.RuoloEnum.Admin); /*Enum.GetValues(typeof(NOT.Models.Ruolo));*/
+    //List<SelectListItem> listItems = new List<SelectListItem>();
 
-    List<SelectListItem> listItems = new List<SelectListItem>();
-
-    foreach (NOT.Models.RuoloEnum role in roleList)
-    {
-        listItems.Add(new SelectListItem
-        {
-            Text = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>.GetDisplayValue(role),
-            //Text = role.ToString(),
-            Value = role.ToString()
-        });
-    }
-    <div class="form-group">
-        @Html.LabelFor(m => m.Ruolo, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Ruolo, listItems, "-- Select Status --", new { @class = "form-control" })
-        </div>
-    </div>
+    //foreach (NOT.Models.RuoloEnum role in roleList)
+    //{
+    //    listItems.Add(new SelectListItem
+    //    {
+    //        Text = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>.GetDisplayValue(role),
+    //        //Text = role.ToString(),
+    //        Value = role.ToString()
+    //    });
+    //}
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.Ruolo, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Ruolo, listItems, "-- Select Status --", new { @class = "form-control" })
+            </div>
+        </div>*@
 
     @*<ul>
-        @foreach (var value in @EnumHelper<UserPromotion>.GetValues(UserPromotion.None))
-        {
-            if (value == Model.JobSeeker.Promotion)
+            @foreach (var value in @EnumHelper<UserPromotion>.GetValues(UserPromotion.None))
             {
-                var description = EnumHelper<UserPromotion>.GetDisplayValue(value);
-                <li>@Html.DisplayFor(e => description)</li>
+                if (value == Model.JobSeeker.Promotion)
+                {
+                    var description = EnumHelper<UserPromotion>.GetDisplayValue(value);
+                    <li>@Html.DisplayFor(e => description)</li>
+                }
             }
-        }
-    </ul>*@
+        </ul>*@
 
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Registrazione" />
+            <input type="submit" class="btn btn-default btn-outline-primary" value="Registrazione" />
         </div>
     </div>
 }

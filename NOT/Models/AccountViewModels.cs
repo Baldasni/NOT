@@ -97,8 +97,9 @@ namespace NOT.Models
         [Compare("Password", ErrorMessage = "La password e la password di conferma non corrispondono.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [Display(Name = "Ruolo")]
+        //[Required]
+        //[Display(Name = "Ruolo")] 
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public string Ruolo { get; set; }
     }
     public class ResetPasswordViewModel
