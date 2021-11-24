@@ -11,47 +11,57 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-
+@*@section ListaUtenticss {*@
+@*@Styles.Render("~/bundles/ListaUtenti/css")*@
+@*}*@
 
 <p>
     @Html.ActionLink("Add New Utente", "AddUtente")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetRoles)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @String.Join(",", item.AspNetRoles.Select(x => x==null ? "" : x.Name.ToString()).ToArray())
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "EditUtente", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "DeleteUtente", new { id = item.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
-    </td>
-</tr>}
+<table id="dtListaUtenti" class="table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="th-sm d-none">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th class="th-sm sorting">
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.AspNetRoles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="d-none">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @String.Join(",", item.AspNetRoles.Select(x => x == null ? "" : x.Name.ToString()).ToArray())
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUtente", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteUtente", new { id = item.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+@*@section ListaUtentiScripts {*@
+@Scripts.Render("~/bundles/ListaUtenti/js")
+@*}*@
