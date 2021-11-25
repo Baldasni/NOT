@@ -150,6 +150,8 @@ namespace NOT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            //l'utente si registra come Customer poi chi ha le autorità, se vuole, gli cambia il ruolo
+            model.Ruolo = NOT.Models.RuoloEnum.Customer.ToString();
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
@@ -157,7 +159,8 @@ namespace NOT.Controllers
 
                 if (result.Succeeded)
                 {
-                    var result1 = UserManager.AddToRole(user.Id, model.Ruolo);
+                    //var result1 = UserManager.AddToRole(user.Id, model.Ruolo);
+                    var result1 = UserManager.AddToRole(user.Id, NOT.Models.RuoloEnum.Customer.ToString());
 
                     if (result1.Succeeded)
                     {

@@ -1,3 +1,7 @@
+--permesso da dare alla cartella del repository è:
+-- NT SERVICE\MSSQL$SQLEXPRESS
+-- IIS APPPOOL\DefaultAppPool
+
 IF NOT EXISTS (SELECT name FROM sys.server_principals WHERE name = 'IIS APPPOOL\DefaultAppPool')
 BEGIN
     CREATE LOGIN [IIS APPPOOL\DefaultAppPool] 
