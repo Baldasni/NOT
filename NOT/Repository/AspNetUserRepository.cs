@@ -147,6 +147,52 @@ namespace NOT.Repository
             //}
         }
 
+        public static AspNetRole GetRuoloByName(string nameRole)
+        {
+            //try
+            //{
+            //    Connection();
+            //    Open();
+
+            //U.Id as UserID, U.UserName, U.Email, E.Name as Ruolo
+            //var lookup = new Dictionary<string, AspNetRole>();
+            AspNetRole role = Query<AspNetRole>(
+@"select  R.*
+    from [dbo].[AspNetRoles] R 
+    where R.Name = '" + nameRole + "'").ToList<AspNetRole>().FirstOrDefault();
+
+            //    Dispose();
+
+            return role;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+        }
+
+        public static List<AspNetRole> GetListaRuoli()
+        {
+            //try
+            //{
+            //    Connection();
+            //    Open();
+
+            //U.Id as UserID, U.UserName, U.Email, E.Name as Ruolo
+            var lookup = new Dictionary<string, AspNetRole>();
+            Query<AspNetRole>(
+@"select  R.*
+    from [dbo].[AspNetRoles] R ");
+
+            //    Dispose();
+
+            return lookup.Values.ToList();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+        }
         //To view AspNetUser details with generic list 
         //public List<AspNetUser> GetAllAspNetUsers()
         //{

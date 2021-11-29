@@ -12,6 +12,10 @@
 <div class="form-horizontal">
     <h4>EditUtenteViewModel</h4>
     <hr />
+    <div class="form-group">
+        @Html.DisplayNameFor(model => model.UserId)
+    </div>
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -38,15 +42,18 @@
 
         foreach (NOT.Models.RuoloEnum role in roleList)
         {
-            listItems.Add(new SelectListItem
+            if (role >= (User.IsInRole("Admin") ? NOT.Models.RuoloEnum.Admin : NOT.Models.RuoloEnum.Manager))
             {
-                Text = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>
-                .GetDisplayValue(role),
-                //Text = role.ToString(),
-                Value = role.ToString()
-            });
+                listItems.Add(new SelectListItem
+                {
+                    Text = NOT.Helper.EnumHelper<NOT.Models.RuoloEnum>
+                    .GetDisplayValue(role),
+                    //Text = role.ToString(),
+                    Value = role.ToString()
+                });
+            }
         }
-    }
+                }
     <div class="form-group">
         @Html.LabelFor(model => model.Ruolo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

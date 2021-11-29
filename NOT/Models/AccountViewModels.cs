@@ -3,20 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NOT.Models
 {
-    public enum RuoloEnum
-    {
-        [Display(Name = "Amministratore")]
-        Admin,
-        [Display(Name = "Coordinatore")]
-        Manager,
-        [Display(Name = "Impiegato")]
-        Employee,
-        [Display(Name = "Utenti")]
-        CustomerManager,
-        [Display(Name = "Utente")]
-        Customer
-    }
-
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
