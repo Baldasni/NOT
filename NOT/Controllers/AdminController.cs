@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace NOT.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         // GET: Admin/ListaUtenti
@@ -24,12 +25,14 @@ namespace NOT.Controllers
         }
 
         // GET: Admin/AddUtente
+        [AllowAnonymous]
         public ActionResult AddUtente()
         {
             return View(new AddUtenteViewModel());
         }
 
-        // POST: Admion/AddUtente
+        // POST: Admin/AddUtente
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> AddUtente(AddUtenteViewModel user)
         {
@@ -71,20 +74,46 @@ namespace NOT.Controllers
 
         // POST:Update the details into database
         [HttpPost]
-        public ActionResult EditUtente(string id, EditUtenteViewModel obj)
+        public ActionResult EditUtente(string id, EditUtenteViewModel model)
         {
             try
             {
-                AspNetUserRepository userRepo = new AspNetUserRepository();
-                AspNetUserRepository.UpdateAspNetUser(new AspNetUser()
-                                                {
-                                                    Email = obj.Email
-                                                });
-                return RedirectToAction("GetAllUserDetails");
+                using (var context = new ApplicationDbContext())
+                {
+                    var store = new UserStore<ApplicationUser>(context);
+                    var manager = new UserManager<ApplicationUser>(store);
+                    ApplicationUser user = new ApplicationUser();
+
+                    user = manager.FindById(id);
+                    user.Email = model.Email;
+                    user.UserName = model.UserName;
+
+                    Task.WaitAny(manager.UpdateAsync(user));
+                
+                    if (model.Ruolo != null && model.Ruolo != "")
+                    {
+                        IList<string> deb = manager.GetRoles(user.Id);
+                        Task.WaitAny(manager.RemoveFromRoleAsync(user.Id, manager.GetRoles(user.Id).FirstOrDefault()));
+                        Task.WaitAny(manager.AddToRoleAsync(user.Id, model.Ruolo));
+                    }
+                    Task.WaitAny(context.SaveChangesAsync());
+                }
+
+                //AspNetUserRepository userRepo = new AspNetUserRepository();
+                //List<AspNetRole> roles = new List<AspNetRole>();
+                //roles.Add(AspNetUserRepository.GetRuoloByName(obj.Ruolo));
+                //AspNetUserRepository.UpdateAspNetUser(new AspNetUser()
+                //                                {
+                //                                    Id = id,
+                //                                    UserName = obj.UserName,
+                //                                    Email = obj.Email,
+                //                                    AspNetRoles = roles
+                //                                });
+                return RedirectToAction("ListaUtenti");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return View(e);
             }
         }
 
