@@ -1,0 +1,36 @@
+## https://www.atlassian.com/git/tutorials/what-is-git
+
+#lista ultimi file modificati
+git --stat --oneline
+
+#lista ultime commit
+git log --graph --decorate --oneline --all
+
+#lista linee di codice modificate di un file e da chi
+git blame -w <nomefile>
+
+#aggiungi le modifiche dei file all'area di stazionamento
+git add *
+
+#committa le modifiche
+git commit -m "commento"
+
+
+#sostituisce l'ultimo commit (serve a modificare il commento o a modificare l'ultimo commit)
+git commit -amend -m "commento"
+
+#differenza tra branch
+git diff master..sviluppo
+
+#scarica commit, file e riferimenti da un repository remoto nel repository locale
+git fetch origin sviluppo
+
+#cambia branch
+git checkout sviluppo
+
+#caricare il contenuto del repository locale in un repository remoto
+git push origin sviluppo
+
+#recuperare e scaricare contenuto da un repository remoto e aggiornare immediatamente il repository locale in modo che corrisponda a quel contenuto
+#equivale ad effettuare prima git fetch e poi git merge
+git pull origin sviluppo
