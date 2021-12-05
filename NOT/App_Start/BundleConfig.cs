@@ -29,8 +29,16 @@ namespace NOT
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/bundles/ListaUtenti/css").Include(
+          "~/DataTables/datatables.min.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/popper").Include(
           "~/Scripts/popper.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ListaUtenti/js").Include(
+          "~/DataTables/datatables.min.js",
+          "~/Scripts/ListaUtenti.js"));
+
         }
     }
 }
