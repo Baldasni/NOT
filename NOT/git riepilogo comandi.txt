@@ -34,3 +34,13 @@ git push origin sviluppo
 #recuperare e scaricare contenuto da un repository remoto e aggiornare immediatamente il repository locale in modo che corrisponda a quel contenuto
 #equivale ad effettuare prima git fetch e poi git merge
 git pull origin sviluppo
+
+#Synchronizing a local Git repository with a remote one
+#After fetching, remove any remote-tracking branches which no longer exist on the remote.
+git fetch --prune
+
+#delete branch (effettua il merge)
+git branch -d <nomeBranch>
+#delete branch (NON effettua il merge)
+git branch -D <nomeBranch>
+
