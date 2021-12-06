@@ -16,6 +16,7 @@ namespace NOT.Controllers
     public class AdminController : Controller
     {
         // GET: Admin/ListaUtenti
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult ListaUtenti()
         {
             AspNetUserRepository userRepo = new AspNetUserRepository();
@@ -63,6 +64,7 @@ namespace NOT.Controllers
         }
 
         // GET: Bind controls to Update details
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult EditUtente(string id)
         {
             AspNetUserRepository userRepo = new AspNetUserRepository();
@@ -118,6 +120,7 @@ namespace NOT.Controllers
         }
 
         // GET: Delete  AddUtenteViewModel details by id
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult DeleteUtente(string id)
         {
             try
