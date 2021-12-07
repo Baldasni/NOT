@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOT.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,6 +28,15 @@ namespace NOT.Controllers
 
             return View();
             //return Content("We are not using Identity");
+        }
+
+        [Authorize(Roles = "Admin,Manager")]
+        public ActionResult TestTabella()
+        {
+            //TabellaRepository userRepo = new TabellaRepository();
+            //return View(userRepo.GetAllAspNetUsers());
+            return View(TabellaRepository.GetTabella());
+
         }
     }
 }
