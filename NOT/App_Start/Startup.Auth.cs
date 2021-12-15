@@ -26,6 +26,7 @@ namespace NOT
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
+                ExpireTimeSpan = new TimeSpan(1,0,0),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Consente all'applicazione di convalidare l'indicatore di sicurezza quando l'utente esegue l'accesso.

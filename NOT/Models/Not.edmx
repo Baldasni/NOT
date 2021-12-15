@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NotDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NotDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,6 +65,26 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Soci">
+          <Key>
+            <PropertyRef Name="IdSocio" />
+          </Key>
+          <Property Name="IdSocio" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cognome" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodifeFiscale" Type="nchar" MaxLength="16" />
+          <Property Name="DataNascita" Type="date" />
+          <Property Name="ComuneNascita" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sesso" Type="nchar" MaxLength="1" />
+          <Property Name="DataIscrizione" Type="date" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndirizzoResidenza" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComuneResidenza" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinciaResidenza" Type="nchar" MaxLength="2" />
+          <Property Name="Cap" Type="nchar" MaxLength="5" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -129,6 +149,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soci" EntityType="Self.Soci" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -146,8 +167,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NotDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -260,7 +280,28 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Soci" EntityType="NotDBModel.Socio" />
         </EntityContainer>
+        <EntityType Name="Socio">
+          <Key>
+            <PropertyRef Name="IdSocio" />
+          </Key>
+          <Property Name="IdSocio" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cognome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodifeFiscale" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="DataNascita" Type="DateTime" Precision="0" />
+          <Property Name="ComuneNascita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sesso" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="DataIscrizione" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndirizzoResidenza" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComuneResidenza" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinciaResidenza" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Cap" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -330,6 +371,27 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Soci">
+            <EntityTypeMapping TypeName="NotDBModel.Socio">
+              <MappingFragment StoreEntitySet="Soci">
+                <ScalarProperty Name="Cap" ColumnName="Cap" />
+                <ScalarProperty Name="ProvinciaResidenza" ColumnName="ProvinciaResidenza" />
+                <ScalarProperty Name="ComuneResidenza" ColumnName="ComuneResidenza" />
+                <ScalarProperty Name="IndirizzoResidenza" ColumnName="IndirizzoResidenza" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DataIscrizione" ColumnName="DataIscrizione" />
+                <ScalarProperty Name="Sesso" ColumnName="Sesso" />
+                <ScalarProperty Name="ComuneNascita" ColumnName="ComuneNascita" />
+                <ScalarProperty Name="DataNascita" ColumnName="DataNascita" />
+                <ScalarProperty Name="CodifeFiscale" ColumnName="CodifeFiscale" />
+                <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="IdSocio" ColumnName="IdSocio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

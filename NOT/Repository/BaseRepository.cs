@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,16 @@ namespace NOT.Repository
 {
     public class BaseRepository
     {
+        protected static string GetSqlFromFile(string nomeFile)
+        {
+            //https://stackoverflow.com/questions/6041332/best-way-to-get-application-folder-path
+            return GetSqlFromPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Repository", "Sql", nomeFile));
+        }
+        protected static string GetSqlFromPath(string path)
+        {
+            string script = File.ReadAllText(path); //@"E:\Project Docs\MX462-PD\MX756_ModMappings1.sql");
+            return script;
+        }
 
         protected static T QueryFirstOrDefault<T>(string sql, object parameters = null)
         {

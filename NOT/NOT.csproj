@@ -201,6 +201,9 @@
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\RuoloEnum.cs" />
+    <Compile Include="Models\Socio.cs">
+      <DependentUpon>Not.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repository\AspNetUserRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -221,10 +224,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Repository\TabellaRepository.cs" />
+    <Compile Include="Repository\DbRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-NOT.mdf" />
+    <Content Include="App_Data\aspnet-NOT_log.ldf">
+      <DependentUpon>aspnet-NOT.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -260,6 +267,7 @@
       <DependentUpon>Not.edmx</DependentUpon>
       <LastGenOutput>Not.cs</LastGenOutput>
     </Content>
+    <Content Include="Repository\Sql\EstraiTutteLeTabelle.sql" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -411,6 +419,7 @@
     <Content Include="Views\Admin\ListaUtenti.cshtml" />
     <Content Include="Views\Admin\EditUtente.cshtml" />
     <Content Include="Views\Admin\AddUtente.cshtml" />
+    <Content Include="Views\Test\TestTabella.cshtml" />
     <None Include="Web.Localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -419,7 +428,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace NOT.Controllers
         {
             //TabellaRepository userRepo = new TabellaRepository();
             //return View(userRepo.GetAllAspNetUsers());
-            return View(TabellaRepository.GetTabella());
+            return View(DbRepository.GetTabelle());
 
         }
     }
